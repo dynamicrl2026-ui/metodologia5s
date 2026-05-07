@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Metodología 5S Interactiva</title>
+<link rel="stylesheet" href="metodologia.css">
+</head>
+
+
+<body>
+
+
+<!-- PORTADA -->
+<header class="hero">
+    <h1>Metodología 5S</h1>
+    <p>Organización, orden y disciplina</p>
+</header>
+
+
+<!-- INICIO -->
+<div id="inicio" class="container">
+
+
+    <div class="card seiri" onclick="mostrar('seiri')"><h2>Seiri</h2><p>Clasificar</p></div>
+    <div class="card seiton" onclick="mostrar('seiton')"><h2>Seiton</h2><p>Ordenar</p></div>
+    <div class="card seiso" onclick="mostrar('seiso')"><h2>Seiso</h2><p>Limpiar</p></div>
+    <div class="card seiketsu" onclick="mostrar('seiketsu')"><h2>Seiketsu</h2><p>Estandarizar</p></div>
+    <div class="card shitsuke" onclick="mostrar('shitsuke')"><h2>Shitsuke</h2><p>Disciplina</p></div>
+
+
+</div>
+
+
+<!-- SEIRI -->
+<section id="seiri" class="detalle" style="background-image:url('https://images.unsplash.com/photo-1581578731548-c64695cc6952');">
+<div class="overlay">
+<h2>Seiri (Clasificar / Sort)</h2>
+<p>Separar lo necesario de lo innecesario y eliminar todo lo que no aporta valor.</p>
+<img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952">
+<button onclick="siguiente('seiton')">Siguiente →</button>
+</div>
+</section>
+
+
+<!-- SEITON -->
+<section id="seiton" class="detalle" style="background-image:url('https://images.unsplash.com/photo-1580894908361-967195033215');">
+<div class="overlay">
+<h2>Seiton (Ordenar)</h2>
+<p>Ubicar cada cosa en su lugar lógico.</p>
+<img src="https://images.unsplash.com/photo-1580894908361-967195033215">
+<button onclick="siguiente('seiso')">Siguiente →</button>
+</div>
+</section>
+
+
+<!-- SEISO -->
+<section id="seiso" class="detalle" style="background-image:url('https://images.unsplash.com/photo-1585421514738-01798e348b17');">
+<div class="overlay">
+<h2>Seiso (Limpiar)</h2>
+<p>Mantener limpio y detectar problemas.</p>
+<img src="https://images.unsplash.com/photo-1585421514738-01798e348b17">
+<button onclick="siguiente('seiketsu')">Siguiente →</button>
+</div>
+</section>
+
+
+<!-- SEIKETSU -->
+<section id="seiketsu" class="detalle" style="background-image:url('https://images.unsplash.com/photo-1554774853-aae0a22c8aa4');">
+<div class="overlay">
+<h2>Seiketsu (Estandarizar)</h2>
+<p>Crear reglas y rutinas.</p>
+<img src="https://images.unsplash.com/photo-1554774853-aae0a22c8aa4">
+<button onclick="siguiente('shitsuke')">Siguiente →</button>
+</div>
+</section>
+
+
+<!-- SHITSUKE -->
+<section id="shitsuke" class="detalle" style="background-image:url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe');">
+<div class="overlay">
+<h2>Shitsuke (Disciplina)</h2>
+<p>Crear hábitos duraderos.</p>
+<img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe">
+
+
+<button onclick="volver()">Volver</button>
+
+
+<br><br>
+
+
+<button onclick="iniciarJuego()" style="background:#27ae60;">
+Iniciar juego 🎮
+</button>
+
+
+</div>
+</section>
+
+
+<!-- JUEGO -->
+<section id="juego" class="detalle juego-bg">
+<div class="overlay">
+
+
+<div class="game-header">
+    <h2>Juego 5S</h2>
+    <div id="timer">05:00</div>
+</div>
+
+
+<div id="preguntas"></div>
+
+
+<p id="resultado"></p>
+
+
+<button onclick="volverIntentar()" style="background:#f39c12;">
+🔄 Volver a intentar
+</button>
+
+
+<button onclick="volver()">Salir del juego</button>
+
+
+</div>
+</section>
+
+
+<script>
+let tiempo = 300;
+let intervalo;
+
+
+const preguntas = [
+{q:"Seiri significa?",a:"eliminar"},
+{q:"Seiri elimina lo?",a:"innecesario"},
+{q:"Seiton es?",a:"ordenar"},
+{q:"Seiton mejora?",a:"tiempo"},
+{q:"Seiso es?",a:"limpiar"},
+{q:"Seiso detecta?",a:"problemas"},
+{q:"Seiketsu es?",a:"estandarizar"},
+{q:"Seiketsu usa?",a:"normas"},
+{q:"Shitsuke es?",a:"disciplina"},
+{q:"Shitsuke crea?",a:"habitos"}
+];
+
+
+function mostrar(id){
+    document.getElementById("inicio").style.display="none";
+    document.querySelector(".hero").style.display="none";
+    document.getElementById(id).style.display="block";
+}
+
+
+function siguiente(id){
+    document.querySelectorAll(".detalle").forEach(e=>e.style.display="none");
+    document.getElementById(id).style.display="block";
+}
+
+
+function volver(){
+    clearInterval(intervalo);
+    document.querySelectorAll(".detalle").forEach(e=>e.style.display="none");
+    document.getElementById("inicio").style.display="flex";
+    document.querySelector(".hero").style.display="block";
+}
+
+
+function iniciarTimer(){
+    intervalo = setInterval(()=>{
+        let m = Math.floor(tiempo/60);
+        let s = tiempo%60;
+
+
+        document.getElementById("timer").innerHTML =
+        `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+
+
+        tiempo--;
+
+
+        if(tiempo < 0){
+            clearInterval(intervalo);
+            finalizar();
+        }
+    },1000);
+}
+
+
+function iniciarJuego(){
+    document.querySelectorAll(".detalle").forEach(e=>e.style.display="none");
+    document.getElementById("juego").style.display="block";
+
+
+    tiempo = 300;
+
+
+    let html="";
+    preguntas.forEach((p,i)=>{
+        html+=`<p>${i+1}. ${p.q}</p><input id="r${i}"><br><br>`;
+    });
+
+
+    html+=`<button onclick="corregir()">Finalizar</button>`;
+
+
+    document.getElementById("preguntas").innerHTML=html;
+    document.getElementById("resultado").innerHTML="";
+
+
+    iniciarTimer();
+}
+
+
+function corregir(){
+    clearInterval(intervalo);
+    finalizar();
+}
+
+
+function finalizar(){
+    let puntos=0;
+
+
+    let respuestasCorrectas = "";
+
+
+    preguntas.forEach((p,i)=>{
+        let r=document.getElementById("r"+i);
+
+
+        let respuestaUsuario = r ? r.value.toLowerCase() : "";
+
+
+        let correcta = p.a;
+
+
+        if(r && respuestaUsuario.includes(correcta)){
+            puntos++;
+        }
+
+
+        if(r) r.disabled=true;
+
+
+        respuestasCorrectas += `
+        <p><strong>${i+1}. ${p.q}</strong><br>
+        ✔ Respuesta correcta: <span style="color:#2ecc71">${correcta}</span><br>
+        Tu respuesta: <span style="color:#f1c40f">${respuestaUsuario || "sin respuesta"}</span>
+        </p><br>
+        `;
+    });
+
+
+    document.getElementById("resultado").innerHTML =
+    `
+    ⏰ Tiempo finalizado<br>
+    🎯 Puntaje: ${puntos} / 10
+    <hr><br>
+    <h3>Respuestas correctas:</h3>
+    ${respuestasCorrectas}
+    `;
+}
+
+
+
+
+function volverIntentar(){
+    clearInterval(intervalo);
+    iniciarJuego();
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+
+
+/* HERO */
+.hero{
+    height:60vh;
+    background:url('https://images.unsplash.com/photo-1492724441997-5dc865305da7') center/cover;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+
+/* CARDS */
+.container{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    padding:30px;
+    gap:20px;
+}
+
+
+.card{
+    width:200px;
+    height:120px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    border-radius:15px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+
+.card:hover{transform:scale(1.1)}
+
+
+.seiri{background:#e74c3c}
+.seiton{background:#f39c12}
+.seiso{background:#27ae60}
+.seiketsu{background:#2980b9}
+.shitsuke{background:#8e44ad}
+
+
+/* SECCIONES */
+.detalle{
+    display:none;
+    min-height:100vh;
+    background-size:cover;
+    background-position:center;
+}
+
+
+.overlay{
+    background:rgba(0,0,0,0.75);
+    color:white;
+    padding:40px;
+    max-width:800px;
+    margin:auto;
+}
+
+
+.overlay img{
+    width:100%;
+    margin:20px 0;
+    border-radius:10px;
+}
+
+
+/* JUEGO */
+.juego-bg{
+    display:none;
+    min-height:100vh;
+    background:url('https://images.unsplash.com/photo-1552664730-d307ca884978') center/cover;
+}
+
+
+.game-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+
+#timer{
+    font-size:22px;
+    background:rgba(255,255,255,0.2);
+    padding:10px;
+    border-radius:10px;
+}
+
+
+/* INPUT */
+input{
+    width:100%;
+    padding:8px;
+    margin-top:5px;
+}
+
+
+/* BOTONES */
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    background:#3498db;
+    color:white;
+    cursor:pointer;
+}
+
+
+button:hover{background:#2c3e50}
